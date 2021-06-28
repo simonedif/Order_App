@@ -1,11 +1,11 @@
 //Render Text Above List of Meal
-import React from 'rect';
+import React from 'react';
 
-import style from './MealsSummary.module.css';
+import style from './MealSummary.module.css';
 
 const MealSummary = () => {
   return (
-    <section className={style.Summary}>
+    <section className={style.summary}>
       <h2> Item Selected, Delivered To You</h2>
       <p>
         Choose your favorite meal from our broad selection of available meals
