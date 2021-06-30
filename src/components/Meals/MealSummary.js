@@ -6,7 +6,7 @@ import style from './MealSummary.module.css';
 const MealSummary = () => {
   return (
     <section className={style.summary}>
-      <h2> Item Selected, Delivered To You</h2>
+      <h2> Item Selected, To Be Collected</h2>
       <p>
         Choose your favorite meal from our broad selection of available meals
         and enjoy a delicious lunch or dinner at home.
