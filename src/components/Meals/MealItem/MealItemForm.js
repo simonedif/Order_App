@@ -3,11 +3,12 @@ import React from 'react';
 import Style from './MealItemForm.module.css';
 import Input from '../../UI/Input';
 
+//Line 10: input - passing the Date the the re-usable component
 const MealItemForm = (props) => {
   return (
     <form className={Style.form}>
-      <Input label="Amount" Input={{
-        id: 'amount',
+      <Input label="Amount" input={{
+        id: 'amount' + props.id,
         type: 'number',
         min: '1',
         max: '5',

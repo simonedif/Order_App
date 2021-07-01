@@ -2,10 +2,12 @@ import React from 'react';
 
 import Style from './Input.module.css'
 
+//For Input used {..props to be able to re-use the componet}
+
 const Input = (props) => {
   return (
-    <div>
-      <label htmlFor={props.input.id} className={Style.input}>{props.label}</label>
+    <div className={Style.input}>
+      <label htmlFor={props.input.id}>{props.label}</label>
       <input {...props.input} />
     </div>
   );
