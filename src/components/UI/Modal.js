@@ -5,9 +5,10 @@ import ReactDom from 'react-dom';
 
 import Style from './Modal.module.css';
 
+//passing props to be able to close the screen from anywhere on the page.
 const Backdrop = (props) => {
   return (
-    <div className={Style.backdrop}></div>
+    <div className={Style.backdrop} onClick={props.onClose}></div>
   );
 };
 
@@ -24,7 +25,7 @@ const portalElement = document.getElementById('overlays');
 const Modal = (props) => {
   return (
     <React.Fragment>
-      {ReactDom.createPortal(<Backdrop />, portalElement)}
+      {ReactDom.createPortal(<Backdrop onClose={props.onClose} />, portalElement)}
       {ReactDom.createPortal(<ModalOverlay>{props.children}</ModalOverlay>, portalElement)}
     </React.Fragment>
   );
