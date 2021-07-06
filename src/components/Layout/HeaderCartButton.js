@@ -10,7 +10,9 @@ const HeaderCartButton = (props) => {
   
   //Accessing The Store Contex
   const cartCtx = useContext(CartContex);
+  console.log(cartCtx.items);
 
+  //0 is the number where thhe count star
   const numberOfCartItems = cartCtx.items.reduce((curNumber, item) => {
     return curNumber + item.amount;
   }, 0);

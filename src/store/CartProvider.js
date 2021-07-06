@@ -1,13 +1,41 @@
+import { update } from 'lodash';
+import React, { useReducer } from 'react';
+
 import CartContex from "./cart-contex";
 
-const CartProvider = (props) => {
-  const addItemToCartHandler = (item) => {};
+//Deafult State
+const defaultCartState = {
+  items: [],
+  totalAmount: 0
+};
 
-  const removeItemFromCartHandler = (id) => {};
+const cartReducer = (state, action) => {
+  if(action.type === 'ADD') {
+    const updatedItems = state.items.concat(action.item);
+    const updateTotalAmount = state.totalAmount + action.item.amount;
+    return {
+      items: updatedItems,
+      totalAmount: updateTotalAmount
+    };
+  };
+  return defaultCartState;
+};
+
+const CartProvider = (props) => {
+
+  const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
+
+  const addItemToCartHandler = (item) => {
+    dispatchCartAction({type: 'ADD', item: item});
+  };
+
+  const removeItemFromCartHandler = (id) => {
+    dispatchCartAction({type: 'REMOVE', id: id});
+  };
 
   const cartContex = {
-    items: [],
-    totalAmount: 0,
+    items: cartState.items,
+    totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
   };
