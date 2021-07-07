@@ -1,26 +1,20 @@
 //Cart Component
-
-import React from "react";
+import React, { useContext } from "react";
 import Style from './Cart.module.css';
 
 //Modal Component Import
 import Modal from '../UI/Modal';
-
+import CartContex from "../../store/cart-contex";
 
 const Cart = (props) => {
-
+  //Accessing the Contex
+  const cartCtx = useContext(CartContex);
+  const totalAmount = cartCtx.totalAmount.toFixed(2);
+  
   //To Style the CartItem
   const cartItem = (
     <ul className={Style['cart-items']}>
-      {[
-        {
-          id: "m3",
-          name: "Whole chicken",
-          description:
-            "Flame-grilled, infused with PERi-PERi and served in your choice of spice. Cut into quarters and perfect with sides, its great for sharing!",
-          price: 12.99,
-        },
-      ].map((item) => (
+      {cartCtx.items.map((item) => (
         <li>{item.name}</li>
       ))}
     </ul>
