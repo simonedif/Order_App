@@ -7,9 +7,6 @@ import Modal from '../UI/Modal';
 import CartContex from "../../store/cart-contex";
 import CartItem from './CartItem';
 
-const addItemRemovalHandler = (id) => {};
-
-const removeItemHandler = (item) => {};
 
 const Cart = (props) => {
   //Accessing the Contex
@@ -18,6 +15,13 @@ const Cart = (props) => {
   console.log(totalAmount)
   const hasItem = cartCtx.items.length > 0 ;
 
+  const addItemRemovalHandler = (item) => {
+    cartCtx.addItem({...item, amount: 1})
+  };
+  
+  const removeItemHandler = (id) => {
+   cartCtx.addItem(id)
+  };
   
   //To Style the CartItem
   const cartItem = (

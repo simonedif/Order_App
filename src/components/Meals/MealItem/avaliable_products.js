@@ -1,4 +1,4 @@
-export default [
+const DATA = [
   {
     description:
       "One breast and one leg, flame-grilled and infused with PERi-PERi. Served on the bone with crispy skin, in your choice of spice.",
@@ -535,3 +535,5 @@ export default [
     type: "drink",
   },
 ];
+
+export default DATA

@@ -6,7 +6,7 @@ import style from "./AvaiableMeal.module.css";
 //Wap the Avaiable Items with Card component
 import Card from "../UI/Card";
 import MealItem from "../Meals/MealItem/MealItem";
-import data from './MealItem/avaliable_products';
+import DATA from './MealItem/avaliable_products';
 
 // const DUMMY_MEALS = [
 //   {
@@ -38,7 +38,7 @@ import data from './MealItem/avaliable_products';
 //   },
 // ];
 
-const DUMMY_MEALS = data;
+const DUMMY_MEALS = DATA;
 
 //Passing Data to The MealComponent
 const AvaiableMeal = (props) => {
