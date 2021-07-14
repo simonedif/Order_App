@@ -1,12 +1,16 @@
+.maindiv {
+  width: 100%;
+  display: block;
+  
+}
+
 .btn-group button {
   background-color: #10afaf; 
   border: 1px solid #10afaf;
   color: white;
-  padding: 10px 24px; /* Some padding */
-  cursor: pointer; /* Pointer/hand icon */
-  width: 50%; /* Set a width if needed */
-  display: flex;
-  width: 30%;
+  padding: 18px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .btn-group button:not(:last-child) {
