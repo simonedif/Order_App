@@ -1,6 +1,7 @@
 .maindiv {
   width: 100%;
   display: block;
+  text-align: center;
   
 }
 
@@ -11,13 +12,11 @@
   padding: 18px;
   cursor: pointer;
   border-radius: 5px;
+  width: 15%;
+  margin-left: 1%;
 }
 
-.btn-group button:not(:last-child) {
-  border-bottom: none; /* Prevent double borders */
-}
 
-/* Add a background color on hover */
 .btn-group button:hover {
   background-color: #b87a60;
 }
