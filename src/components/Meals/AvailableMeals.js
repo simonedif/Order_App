@@ -9,14 +9,12 @@ import MealItem from "../Meals/MealItem/MealItem";
 import DATA from './MealItem/avaliable_products';
 import ProductType from '../Layout/ProductType';
 
-const DUMMY_MEALS = DATA;
-
 //Passing Data to The MealComponent
 const AvaiableMeal = (props) => {
-  const [menu, setMenu] = useState(DUMMY_MEALS)
+  const [menu, setMenu] = useState(DATA)
   
   const filter = (button) => {
-    const filterData = DUMMY_MEALS.filter(item => item.type === button);
+    const filterData = DATA.filter(item => item.type === button);
     setMenu(filterData)
   }
   
