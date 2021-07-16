@@ -1,6 +1,6 @@
 //Dammmy Data for Avaiable Items
 
-import React from "react";
+import React, { useState } from "react";
 import style from "./AvaiableMeal.module.css";
 
 //Wap the Avaiable Items with Card component
@@ -13,7 +13,14 @@ const DUMMY_MEALS = DATA;
 
 //Passing Data to The MealComponent
 const AvaiableMeal = (props) => {
-  const mealsList = DUMMY_MEALS.filter(item => item.type === "main").map((meal) => (
+  const [menu, setMenu] = useState(DUMMY_MEALS)
+  
+  const filter = (button) => {
+    const filterData = DUMMY_MEALS.filter(item => item.type === button);
+    setMenu(filterData)
+  }
+  
+  const mealsList = menu.map((meal) => (
     <MealItem
       id={meal.id}
       key={meal.id}
@@ -26,7 +33,7 @@ const AvaiableMeal = (props) => {
   return (
     <section className={style.meals}>
       <Card>
-        <ProductType />
+        <ProductType filter={filter} />
         <ul>{mealsList}</ul>
       </Card>
     </section>
