@@ -9,11 +9,24 @@ import MealItem from "../Meals/MealItem/MealItem";
 import DATA from './MealItem/avaliable_products';
 import ProductType from '../Layout/ProductType';
 
+
+//Button have all the Items - Remove Filter button
+const allProducts = ['All', ...new Set(DATA.map(item => item.type))];
+console.log(allProducts);
+
 //Passing Data to The MealComponent
 const AvaiableMeal = (props) => {
   const [menu, setMenu] = useState(DATA)
+  const [button, setButton] = useState(allProducts)
   
   const filter = (button) => {
+
+    //Set Button All
+    if (button === 'All') {
+      setMenu(DATA);
+      return
+    };
+
     const filterData = DATA.filter(item => item.type === button);
     setMenu(filterData)
   }
@@ -31,7 +44,7 @@ const AvaiableMeal = (props) => {
   return (
     <section className={style.meals}>
       <Card>
-        <ProductType filter={filter} />
+        <ProductType button={button} filter={filter} />
         <ul>{mealsList}</ul>
       </Card>
     </section>
