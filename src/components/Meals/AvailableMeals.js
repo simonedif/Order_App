@@ -19,7 +19,6 @@ const AvaiableMeal = (props) => {
   const [menu, setMenu] = useState(DATA)
   const [button, setButton] = useState(allProducts)
 
-  console.log(menu);
   
   const filter = (button) => {
 
