@@ -14,9 +14,22 @@
   border-radius: 5px;
   width: 15%;
   margin-left: 1%;
+  margin-top: 0.5%;
 }
 
 
 .btn-group button:hover {
   background-color: #b87a60;
+}
+
+.btn-group.clicked button {
+  background-color: #b87a60;
+  border: 1px solid #10afaf;
+  color: white;
+  padding: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 15%;
+  margin-left: 1%;
+  margin-top: 0.5%;
 }

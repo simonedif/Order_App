@@ -18,6 +18,8 @@ console.log(allProducts);
 const AvaiableMeal = (props) => {
   const [menu, setMenu] = useState(DATA)
   const [button, setButton] = useState(allProducts)
+
+  console.log(menu);
   
   const filter = (button) => {
 
@@ -26,7 +28,6 @@ const AvaiableMeal = (props) => {
       setMenu(DATA);
       return
     };
-
     const filterData = DATA.filter(item => item.type === button);
     setMenu(filterData)
   }
@@ -44,7 +45,7 @@ const AvaiableMeal = (props) => {
   return (
     <section className={style.meals}>
       <Card>
-        <ProductType button={button} filter={filter} />
+        <ProductType button={button} filter={filter}  />
         <ul>{mealsList}</ul>
       </Card>
     </section>
