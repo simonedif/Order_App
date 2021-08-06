@@ -17,7 +17,7 @@ console.log(allProducts);
 //Passing Data to The MealComponent
 const AvaiableMeal = (props) => {
   const [menu, setMenu] = useState(DATA)
-  const [button, setButton] = useState(allProducts)
+  const [activeButton, setActiveButton] = useState('All')
 
   
   const filter = (button) => {
@@ -25,10 +25,12 @@ const AvaiableMeal = (props) => {
     //Set Button All
     if (button === 'All') {
       setMenu(DATA);
+      setActiveButton('All');
       return
     };
     const filterData = DATA.filter(item => item.type === button);
     setMenu(filterData)
+    setActiveButton(button)
   }
   
   const mealsList = menu.map((meal) => (
@@ -44,7 +46,7 @@ const AvaiableMeal = (props) => {
   return (
     <section className={style.meals}>
       <Card>
-        <ProductType button={button} filter={filter}  />
+        <ProductType activeButton={activeButton} button={allProducts} filter={filter}  />
         <ul>{mealsList}</ul>
       </Card>
     </section>

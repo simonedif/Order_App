@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import Style from "./ProductType.module.css";
 
-const ProductType = ({ filter, button }) => {
-  const [isValid, setIsValid ] = useState(false);
+const ProductType = ({ filter, button, activeButton }) => {
   
+
   return (
     <div className={Style.maindiv}>
-      <div className={`${Style["btn-group"]} ${isValid ? Style["btn-group.clicked"] : ''}`}>
+      <div className={`${Style["btn-group"]}`}>
        {
          button.map((type) => {
-          return <button onClick={() => filter(type)}>{type}</button>
+          return <button style={{backgroundColor:activeButton === type && '#b87a60'}} onClick={() => filter(type)}>{type}</button>
          })
        }
       </div>
