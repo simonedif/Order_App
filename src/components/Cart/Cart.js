@@ -12,7 +12,6 @@ const Cart = (props) => {
   //Accessing the Contex
   const cartCtx = useContext(CartContex);
   const totalAmount = `£ ${cartCtx.totalAmount.toFixed(2)}`;
-  console.log(totalAmount)
   const hasItem = cartCtx.items.length > 0 ;
 
   const addItemRemovalHandler = (item) => {
@@ -20,7 +19,7 @@ const Cart = (props) => {
   };
   
   const removeItemHandler = (id) => {
-   cartCtx.addItem(id)
+   cartCtx.removeItem(id);
   };
   
   //To Style the CartItem
@@ -33,7 +32,7 @@ const Cart = (props) => {
           amount={item.amount}
           price={item.price}
           onRemove={removeItemHandler.bind(null, item.id)}
-          onAdd={addItemRemovalHandler.bind(null, item.item)}
+          onAdd={addItemRemovalHandler.bind(null, item)}
         />
       ))}
     </ul>
