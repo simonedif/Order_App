@@ -1,22 +1,53 @@
 //Dammmy Data for Avaiable Items
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./AvaiableMeal.module.css";
 
 //Wap the Avaiable Items with Card component
 import Card from "../UI/Card";
 import MealItem from "../Meals/MealItem/MealItem";
-import DATA from './MealItem/avaliable_products';
+//import DATA from './MealItem/avaliable_products';
 import ProductType from '../Layout/ProductType';
 
 
-//Button have all the Items - Remove Filter button
-const allProducts = ['All', ...new Set(DATA.map(item => item.type))];
-console.log(allProducts);
-
 //Passing Data to The MealComponent
 const AvaiableMeal = (props) => {
-  const [menu, setMenu] = useState(DATA)
+
+  //Fetch Function
+  const [fetch, setFetch] = useState([fetch]);
+
+  useEffect(() => {
+    
+    const fetchMeals = async () => {
+
+      const response = await fetch('https://order-app-2cddf-default-rtdb.europe-west1.firebasedatabase.app/');
+      const responseData = await response.json();
+
+      const loadMeals = [];
+
+      for (const key in responseData) {
+
+        loadMeals.push({
+          id: responseData[key].id,
+          name: responseData[key].name,
+          description: responseData[key].description,
+          price: responseData[key].price
+        });
+      }
+
+      setFetch(loadMeals)
+    }
+
+    fetchMeals();
+
+  }, []);
+
+//Button have all the Items - Remove Filter button
+  const allProducts = ['All', ...new Set(fetch.map(item => item.type))];
+  console.log(allProducts);
+
+
+  const [menu, setMenu] = useState(fetch)
   const [activeButton, setActiveButton] = useState('All')
 
   
@@ -24,11 +55,11 @@ const AvaiableMeal = (props) => {
 
     //Set Button All
     if (button === 'All') {
-      setMenu(DATA);
+      setMenu(fetch);
       setActiveButton('All');
       return
     };
-    const filterData = DATA.filter(item => item.type === button);
+    const filterData = fetch.filter(item => item.type === button);
     setMenu(filterData)
     setActiveButton(button)
   }
