@@ -14,52 +14,41 @@ import ProductType from '../Layout/ProductType';
 const AvaiableMeal = (props) => {
 
   //Fetch Function
-  const [fetch, setFetch] = useState([fetch]);
+  const [fetchData, setFetchData] = useState([]);
 
   useEffect(() => {
     
     const fetchMeals = async () => {
 
-      const response = await fetch('https://order-app-2cddf-default-rtdb.europe-west1.firebasedatabase.app/');
-      const responseData = await response.json();
-
-      const loadMeals = [];
-
-      for (const key in responseData) {
-
-        loadMeals.push({
-          id: responseData[key].id,
-          name: responseData[key].name,
-          description: responseData[key].description,
-          price: responseData[key].price
-        });
-      }
-
-      setFetch(loadMeals)
+      const response = await fetch('https://order-app-2cddf-default-rtdb.europe-west1.firebasedatabase.app/menu.json');
+      const responseData = await response.json()
+      setFetchData(responseData);
     }
-
+    
     fetchMeals();
-
   }, []);
 
 //Button have all the Items - Remove Filter button
-  const allProducts = ['All', ...new Set(fetch.map(item => item.type))];
+  const allProducts = ['All', ...new Set(fetchData.map(item => item.type))];
   console.log(allProducts);
 
 
-  const [menu, setMenu] = useState(fetch)
+  const [menu, setMenu] = useState(fetchData)
   const [activeButton, setActiveButton] = useState('All')
 
-  
+  useEffect(() => {
+    setMenu(fetchData);
+  }, [fetchData]);
+
   const filter = (button) => {
 
     //Set Button All
     if (button === 'All') {
-      setMenu(fetch);
+      setMenu(fetchData);
       setActiveButton('All');
       return
     };
-    const filterData = fetch.filter(item => item.type === button);
+    const filterData = fetchData.filter(item => item.type === button);
     setMenu(filterData)
     setActiveButton(button)
   }
