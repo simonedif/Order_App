@@ -21,11 +21,12 @@ const AvaiableMeal = (props) => {
   useEffect(() => {
     const fetchMeals = async () => {
       const response = await fetch(
-        "https://order-app-2cddf-default-rtdb.europe-west1.firebasedatabase.app/menu.json"
+        "https://console.firebase.google.com/project/order-app-2cddf/database/order-app-2cddf-default-rtdb/data/~2F/menu"
       );
+      console.log(response);
 
       if (!response.ok) {
-        throw new Error('Error');
+        throw new Error("Error");
       }
 
       const responseData = await response.json();
@@ -52,7 +53,6 @@ const AvaiableMeal = (props) => {
   const [activeButton, setActiveButton] = useState("All");
 
   const filter = (button) => {
-    
     //Set Button All
     if (button === "All") {
       setMenu(fetchData);
@@ -65,10 +65,7 @@ const AvaiableMeal = (props) => {
   };
 
   if (isloading) {
-    return (
-      <section className={StyleLoader.loader}>
-      </section>
-    );
+    return <section className={StyleLoader.loader}></section>;
   }
 
   if (httpError) {
