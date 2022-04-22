@@ -1,19 +1,16 @@
-//Dammmy Data for Avaiable Items
-
 import React, { useState, useEffect } from "react";
 import style from "./AvaiableMeal.module.css";
 
 //Wap the Avaiable Items with Card component
 import Card from "../UI/Card";
 import MealItem from "../Meals/MealItem/MealItem";
-//import DATA from './MealItem/avaliable_products';
 import ProductType from "../Layout/ProductType";
-//import LoaderError from '../UI/LoaderError';
 import StyleLoader from "../UI/loader.module.css";
 
 //Passing Data to The MealComponent
 const AvaiableMeal = (props) => {
-  //Fetch Function
+  
+  //State Dealing With Fetch
   const [fetchData, setFetchData] = useState([]);
   const [isloading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState();
