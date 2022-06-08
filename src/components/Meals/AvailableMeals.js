@@ -1,38 +1,77 @@
-//Dammmy Data for Avaiable Items
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./AvaiableMeal.module.css";
 
 //Wap the Avaiable Items with Card component
 import Card from "../UI/Card";
 import MealItem from "../Meals/MealItem/MealItem";
-import DATA from './MealItem/avaliable_products';
-import ProductType from '../Layout/ProductType';
-
-
-//Button have all the Items - Remove Filter button
-const allProducts = ['All', ...new Set(DATA.map(item => item.type))];
-console.log(allProducts);
+import ProductType from "../Layout/ProductType";
+import StyleLoader from "../UI/loader.module.css";
 
 //Passing Data to The MealComponent
 const AvaiableMeal = (props) => {
-  const [menu, setMenu] = useState(DATA)
-  const [activeButton, setActiveButton] = useState('All')
+  //State Dealing With Fetch
+  const [fetchData, setFetchData] = useState([]);
+  const [isloading, setIsLoading] = useState(true);
+  const [httpError, setHttpError] = useState();
 
-  
-  const filter = (button) => {
+  useEffect(() => {
+    const fetchMeals = async () => {
+      const response = await fetch(
+        "https://order-app-2cddf-default-rtdb.europe-west1.firebasedatabase.app/menu.json"
+      );
+      console.log(response);
 
-    //Set Button All
-    if (button === 'All') {
-      setMenu(DATA);
-      setActiveButton('All');
-      return
+      if (!response.ok) {
+        throw new Error("Error");
+      }
+
+      const responseData = await response.json();
+
+      setFetchData(responseData);
+      setIsLoading(false);
     };
-    const filterData = DATA.filter(item => item.type === button);
-    setMenu(filterData)
-    setActiveButton(button)
+
+    fetchMeals().catch((error) => {
+      setIsLoading(false);
+      setHttpError(error.message);
+    });
+  }, []);
+
+  useEffect(() => {
+    setMenu(fetchData);
+  }, [fetchData]);
+
+  //Button have all the Items - Remove Filter button
+  const allProducts = ["All", ...new Set(fetchData.map((item) => item.type))];
+  console.log(allProducts);
+
+  const [menu, setMenu] = useState(fetchData);
+  const [activeButton, setActiveButton] = useState("All");
+
+  const filter = (button) => {
+    //Set Button All
+    if (button === "All") {
+      setMenu(fetchData);
+      setActiveButton("All");
+      return;
+    }
+    const filterData = fetchData.filter((item) => item.type === button);
+    setMenu(filterData);
+    setActiveButton(button);
+  };
+
+  if (isloading) {
+    return <section className={StyleLoader.loader}></section>;
   }
-  
+
+  if (httpError) {
+    return (
+      <div className={StyleLoader.loadingText}>
+        <p>{httpError}</p>
+      </div>
+    );
+  }
+
   const mealsList = menu.map((meal) => (
     <MealItem
       id={meal.id}
@@ -46,7 +85,11 @@ const AvaiableMeal = (props) => {
   return (
     <section className={style.meals}>
       <Card>
-        <ProductType activeButton={activeButton} button={allProducts} filter={filter}  />
+        <ProductType
+          activeButton={activeButton}
+          button={allProducts}
+          filter={filter}
+        />
         <ul>{mealsList}</ul>
       </Card>
     </section>
